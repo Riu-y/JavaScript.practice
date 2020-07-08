@@ -587,6 +587,237 @@ class Animal {
 
 const animal = new Animal();
 
+constructor内の値をインスタンスプロパティにする
+
+class Animal {
+  constructor() {
+    // nameの値に文字列「レオ」を代入してください
+    this.name = "レオ";
+
+    // ageの値に数値の「3」を代入してください
+    this.age = 3;
+  }
+}
+
+const animal = new Animal();
+
+// 「名前: 〇〇」となるように出力してください
+console.log(`名前:${animal.name}`);
+
+// 「年齢: 〇〇」となるように出力してください
+console.log(`年齢:${animal.age}`);
+
+constructorのインスタンスメソッドを引数で渡せる様にする
+
+class Animal {
+  // 引数に「name」と「age」を追加してください
+  constructor(name,age) {
+    // 「"レオ"」の代わりに引数nameの値を代入してください
+    this.name = name;
+    
+    // 「3」の代わりに引数ageの値を代入してください
+    this.age = age;
+  }
+}
+
+// 引数に「"モカ"」と「8」を渡してください
+const animal = new Animal("モカ",8);
+
+console.log(`名前: ${animal.name}`);
+console.log(`年齢: ${animal.age}`);
+
+メソッドの定義
+
+class Animal {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  
+  // greetメソッドを追加してください
+  greet(){
+    console.log("こんにちは");
+  }
+  
+}
+
+const animal = new Animal("レオ", 3);
+
+console.log(`名前: ${animal.name}`);
+console.log(`年齢: ${animal.age}`);
+
+// animalに対してgreetメソッドを呼び出してください
+animal.greet();
+
+メソッドの中でメソッドを呼び出す
+
+class Animal {
+	constructor(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+	greet(){
+		console.log("こんにちは");
+		}
+	info(){
+		this.greet();
+		console.log(`名前は${this.name}`);
+		console.log(`${this.age}歳です`);
+	}
+}
+
+const animal = new Animal("レオ", 3);
+animal.info();
+
+---クラスの継承---
+
+class Animal {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  
+  greet() {
+    console.log("こんにちは");
+  }
+  
+  info() {
+    this.greet();
+    console.log(`名前は${this.name}です`);
+    console.log(`${this.age}歳です`);
+  }
+}
+
+class Dog extends Animal {
+}
+
+// 定数dogにDogクラスのインスタンスを代入してください
+const dog = new Dog("レオ", 4);
+
+// dogに対してinfoメソッドを呼び出してください
+dog.info();
+
+--独自メソッド--
+
+class Animal {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  
+  greet() {
+    console.log("こんにちは");
+  }
+  
+  info() {
+    this.greet();
+    console.log(`名前は${this.name}です`);
+    console.log(`${this.age}歳です`);
+  }
+}
+
+class Dog extends Animal {
+  // getHumanAgeメソッドを追加してください
+  getHumanAge(){
+    return this.age * 7;
+  }
+}
+
+const dog = new Dog("レオ", 4);
+dog.info();
+
+// 定数humanAgeを定義し、定数dogに対してgetHumanAgeメソッドを呼び出した値を代入してください
+const humanAge = dog.getHumanAge();
+
+// 「人間年齢で〇〇歳です」と出力してください
+console.log(`人間年齢で${humanAge}歳です`);
+
+--メソッドのオーバーライド--
+
+class Animal {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  
+  greet() {
+    console.log("こんにちは");
+  }
+  
+  info() {
+    this.greet();
+    console.log(`名前は${this.name}です`);
+    console.log(`${this.age}歳です`);
+  }
+}
+
+class Dog extends Animal {
+  // infoメソッドを追加してください
+  info(){
+    this.greet();
+    console.log(`名前は${this.name}です`);
+    console.log(`${this.age}歳です`);
+    
+    const humanAge = this.getHumanAge();
+    console.log(`人間年齢で${humanAge}歳です`);
+  }
+  
+
+  getHumanAge() {
+    return this.age * 7;
+  }
+}
+
+const dog = new Dog("レオ", 4);
+dog.info();
+
+----コンストラクタのオーバーライド-----
+
+class Animal {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  
+  greet() {
+    console.log("こんにちは");
+  }
+  
+  info() {
+    this.greet();
+    console.log(`名前は${this.name}です`);
+    console.log(`${this.age}歳です`);
+  }
+}
+
+class Dog extends Animal {
+  // constructorを追加してください
+  constructor(name, age, breed){
+    super(name, age);
+    this.breed = breed;
+  }
+  
+  info() {
+    this.greet();
+    console.log(`名前は${this.name}です`);
+    // 「犬種は〇〇です」と出力してください
+    
+    
+    console.log(`${this.age}歳です`);
+    const humanAge = this.getHumanAge();
+    console.log(`人間年齢で${humanAge}歳です`);
+    console.log(`犬種は${this.breed}です`);
+  }
+  
+  getHumanAge() {
+    return this.age * 7;
+  }
+}
+
+// 3つ目の引数に「"チワワ"」を渡してください
+const dog = new Dog("レオ", 4, "チワワ");
+dog.info();
+
 
 
 

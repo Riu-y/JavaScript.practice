@@ -796,13 +796,13 @@ class Dog extends Animal {
     super(name, age);
     this.breed = breed;
   }
-  
+
   info() {
     this.greet();
     console.log(`名前は${this.name}です`);
     // 「犬種は〇〇です」と出力してください
-    
-    
+
+
     console.log(`${this.age}歳です`);
     const humanAge = this.getHumanAge();
     console.log(`人間年齢で${humanAge}歳です`);
@@ -818,8 +818,186 @@ class Dog extends Animal {
 const dog = new Dog("レオ", 4, "チワワ");
 dog.info();
 
+ファイルの分割 exportとimport
+
+export default クラスネーム;
+
+import クラスネーム from "./ファイルネーム"
+
+値のエクスポート
+クラスだけではなく、定数や値、文字列などもエクスポートすることができる
+
+//dogDate.js
+import Dog from "./dog"
+
+const dog = new Dog("レオ", 4, "チワワ");
+
+export default dog;
+
+//dog.js
+import dog from "./dogData"
+
+dog.info();
+
+
+名前付きエクスポート
+デフォルトエクスポートでは一つの値しか自動的にインポートしないため複数の場合は以下のようにする
+
+// script.js
+import {dog1, dog2} from "./data/dogData"
+
+dog1.info();
+dog2.info();
+
+dogData.js
+import Dog from "../class/dog"
+
+const dog1 = new Dog("レオ", 4, "チワワ");
+const dog2 = new Dog("ベン", 2, "プードル");
+
+export {dog1, dog2};
+
+------パッケージ------
 
 
 
+プッシュメソッド
+
+const characters = ["にんじゃわんこ", "ベイビーわんこ", "ひつじ仙人"];
+
+console.log(characters);
+
+// pushメソッドを使って配列charactersに、文字列「とりずきん」を追加してください
+characters.push("とりずきん");
+
+// 配列charactersを出力してください
+console.log(characters);
+
+forEach
+
+const numbers = [1,2,3];
+
+numbers.forEach(→ (number) =>{console.log(number); ←};コールバック関数
+
+const characters = ["にんじゃわんこ", "ベイビーわんこ", "ひつじ仙人", "とりずきん"];
+// forEachメソッドを使って、配列charactersの中身をすべて出力してください
+characters.forEach((character) => {console.log(character);});
+
+findメソッド
+
+const numbers = [1, 3, 5, 7, 9];
+
+// findメソッドを使って配列numbersから3の倍数を見つけ、定数foundNumberに代入してください
+const foundNumber = numbers.find((number) =>{ return  number % 3 === 0; });
+// foundNumberを出力してください
+console.log(foundNumber);
+
+const characters = [
+  {id: 1, name: "にんじゃわんこ", age: 6},
+  {id: 2, name: "ベイビーわんこ", age: 2},
+  {id: 3, name: "ひつじ仙人", age: 100},
+  {id: 4, name: "とりずきん", age: 21}
+];
+
+// 定数charactersからidが3のオブジェクトを見つけ、定数foundCharacterに代入してください
+const foundCharacter = characters.find(character =>{return character.id === 3; });
+
+// foundCharacterを出力してください
+console.log(foundCharacter);
+
+filterメソッド
+
+const numbers = [1, 2, 3, 4];
+
+// filterメソッドを使ってnumbersから偶数を取り出し、定数evenNumbersに代入してください
+const evenNumbers = numbers.filter((number) =>{return number % 2 === 0; });
+
+// evenNumbersを出力してください
+console.log(evenNumbers);
+
+
+const characters = [
+  {id: 1, name:"にんじゃわんこ", age: 14},
+  {id: 2, name:"ベイビーわんこ", age: 5},
+  {id: 3, name:"ひつじ仙人", age: 100}
+];
+
+// charactersから20歳未満のキャラクターを取り出し、定数underTwentyに代入してください
+const underTwenty = characters.filter((character) =>{ return character.age < 20; });
+
+// underTwentyを出力してください
+console.log(underTwenty);
+
+mapメソッド
+const numbers = [1, 2, 3, 4];
+
+// 定数numbersにmapメソッドを使って配列を作り、定数doubledNumbersに代入してください
+const doubledNumbers = numbers.map((number) =>{ return number * 2; });
+
+// 定数doubledNumbersを出力してください
+console.log(doubledNumbers);
+
+
+const names = [
+  {firstName: "Kate", lastName: "Jones"},
+	{firstName: "John", lastName: "Smith"},
+	{firstName: "Denis", lastName: "Williams"},
+	{firstName: "David", lastName: "Black"}
+];
+
+// 定数namesにmapメソッドを使って新しい配列を作り、定数fullNamesに代入してください
+const fullNames = names.map((name) =>{ return name.firstName + name.lastName; });
+
+// 定数fullNamesを出力してください
+console.log(fullNames);
+
+コールバック関数に関して学ぶ
+JavaScriptでは引数に関数を渡すことができてそのことをコールバック関数と呼ぶ
+
+const printWanko = () => {
+  console.log("にんじゃわんこ");
+};
+
+// 関数callにcallbackという名前の引数を追加してください
+const call = (callback) => {
+  console.log("コールバック関数を呼び出します。");
+  // 引数に渡したcallbackを呼び出してください
+  callback();
+};
+
+// 関数printWankoを引数に渡して関数callを実行してください
+call(printWanko);
+
+引数の中で関数を定義することも可能
+
+const printWanko = () => {
+  console.log("にんじゃわんこ");
+};
+
+const call = (callback) => {
+  console.log("コールバック関数を呼び出します。");
+  callback();
+};
+
+call(printWanko);
+
+// 引数で関数を定義して渡してください
+call(() => {
+  console.log("ひつじ仙人");
+});
+
+
+引数を渡す
+
+
+複数の引数を渡す
+
+const call = (callback) =>{
+	callback("にんじゃわんこ",14)
+};
+
+class((name, age) =>{
+	console.log(`${name}は${age}歳です。`);
+});
 
 
